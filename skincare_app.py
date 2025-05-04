@@ -72,3 +72,47 @@ if st.button("✨ Get My Skin Report"):
     st.markdown("### Your Biotech-Backed Recommendations:")
     for rec in get_recommendations(skin_type, acne):
         st.markdown(f"- {rec}")
+import streamlit as st
+
+# Custom CSS for GlowMint Elegance theme
+st.markdown("""
+    <style>
+        /* Page background */
+        .stApp {
+            background-color: #FFFDF6;
+        }
+
+        /* Title and headers */
+        h1, h2, h3, h4, h5 {
+            color: #2C2C2C;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Button style */
+        .stButton > button {
+            background-color: #FFD700;
+            color: #2C2C2C;
+            border-radius: 10px;
+            padding: 0.5em 1em;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .stButton > button:hover {
+            background-color: #00CFC1;
+            color: white;
+        }
+
+        /* Text elements */
+        .stMarkdown {
+            color: #2C2C2C;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        /* Input fields */
+        .stTextInput, .stSelectbox, .stTextArea {
+            background-color: #AEECEF;
+            border-radius: 5px;
+        }
+    </style>
+""", unsafe_allow_html=True)
