@@ -116,3 +116,64 @@ st.markdown("""
         }
     </style>
 """, unsafe_allow_html=True)
+import streamlit as st
+
+# PAGE SETUP
+st.set_page_config(page_title="GeneGlow Skincare", layout="centered")
+
+# CUSTOM CSS
+st.markdown("""
+    <style>
+        /* Hide Streamlit branding */
+        #MainMenu, footer, header {visibility: hidden;}
+
+        /* Page background and font */
+        .stApp {
+            background-color: #FFFDF6;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        /* Title and header */
+        .title {
+            text-align: center;
+            font-size: 48px;
+            font-weight: bold;
+            color: #2C2C2C;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 20px;
+            color: #00CFC1;
+            margin-top: -10px;
+            margin-bottom: 30px;
+        }
+
+        /* Button style */
+        .stButton > button {
+            background-color: #FFD700;
+            color: #2C2C2C;
+            border-radius: 30px;
+            padding: 0.5em 2em;
+            font-weight: 600;
+            transition: 0.3s ease;
+        }
+
+        .stButton > button:hover {
+            background-color: #00CFC1;
+            color: white;
+        }
+
+        /* Input field highlight */
+        .stTextInput, .stSelectbox, .stTextArea {
+            background-color: #F8F9FA;
+            border-radius: 10px;
+            padding: 0.5em;
+        }
+    </style>
+""", unsafe_allow_html=True)
+
+# GENE GLOW HEADER
+st.markdown('<div class="title">GeneGlow</div>', unsafe_allow_html=True)
+st.markdown('<div class="subtitle">Glow Smarter. Naturally.</div>', unsafe_allow_html=True)
