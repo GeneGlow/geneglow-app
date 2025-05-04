@@ -1,25 +1,24 @@
 import streamlit as st
 
-# PAGE SETUP
+# Set page configuration
 st.set_page_config(page_title="GeneGlow Skincare", layout="centered")
 
 # Initialize session state
 if 'page' not in st.session_state:
-    st.session_state.page = 'home'
+    st.session_state.page = 'welcome'
 
-# CUSTOM CSS
-st.markdown("""
-    <style>
-        .stApp {background-color: #FFFDF6; font-family: 'Segoe UI', sans-serif;}
-        .title {text-align: center; font-size: 48px; font-weight: bold; color: #2C2C2C;}
-        .subtitle {text-align: center; font-size: 20px; color: #00CFC1; margin-bottom: 30px;}
-        .stButton > button {background-color: #FFD700; color: #2C2C2C; border-radius: 30px; padding: 0.5em 2em;}
-        .stButton > button:hover {background-color: #00CFC1; color: white;}
-    </style>
-""", unsafe_allow_html=True)
+# Define the welcome page
+def welcome_page():
+    st.markdown("""
+        <style>
+            .stApp {background-color: #FFFDF6; font-family: 'Segoe UI', sans-serif;}
+            .title {text-align: center; font-size: 48px; font-weight: bold; color: #2C2C2C;}
+            .subtitle {text-align: center; font-size: 20px; color: #00CFC1; margin-bottom: 30px;}
+            .stButton > button {background-color: #FFD700; color: #2C2C2C; border-radius: 30px; padding: 0.5em 2em;}
+            .stButton > button:hover {background-color: #00CFC1; color: white;}
+        </style>
+    """, unsafe_allow_html=True)
 
-# Define pages
-def home():
     st.markdown('<div class="title">Welcome to GeneGlow Skincare</div>', unsafe_allow_html=True)
     st.markdown('<div class="subtitle">Your Personalized Skincare Journey Starts Here!</div>', unsafe_allow_html=True)
 
@@ -33,9 +32,18 @@ def home():
 
     if st.button("Get Started"):
         st.session_state.page = "login"
-        st.rerun()
+        st.experimental_rerun()
 
-def login():
+# Define the login page
+def login_page():
+    st.markdown("""
+        <style>
+            .stApp {background-color: #FFFDF6; font-family: 'Segoe UI', sans-serif;}
+            .stTextInput, .stButton > button {border-radius: 10px; padding: 0.5em;}
+            .stButton > button {background-color: #FFD700; color: #2C2C2C;}
+        </style>
+    """, unsafe_allow_html=True)
+
     st.markdown('<div class="title">GeneGlow Login</div>', unsafe_allow_html=True)
 
     email = st.text_input("Email Address")
@@ -44,30 +52,24 @@ def login():
     if st.button("Login"):
         if email == "test@example.com" and password == "password":
             st.session_state.page = "quiz"
-            st.rerun()
+            st.experimental_rerun()
         else:
             st.error("Invalid credentials. Please try again.")
 
     if st.button("Don't have an account? Sign up"):
         st.session_state.page = "signup"
-        st.rerun()
+        st.experimental_rerun()
 
-def signup():
-    st.markdown('<div class="title">GeneGlow Sign Up</div>', unsafe_allow_html=True)
+# Define the quiz page
+def quiz_page():
+    st.markdown("""
+        <style>
+            .stApp {background-color: #FFFDF6; font-family: 'Segoe UI', sans-serif;}
+            .stButton > button {background-color: #FFD700; color: #2C2C2C; border-radius: 10px; padding: 0.5em;}
+            .stButton > button:hover {background-color: #00CFC1; color: white;}
+        </style>
+    """, unsafe_allow_html=True)
 
-    email = st.text_input("Email Address")
-    password = st.text_input("Password", type="password")
-    confirm_password = st.text_input("Confirm Password", type="password")
-
-    if st.button("Sign Up"):
-        if password == confirm_password:
-            st.success("Account created successfully! Please log in.")
-            st.session_state.page = "login"
-            st.rerun()
-        else:
-            st.error("Passwords do not match. Please try again.")
-
-def quiz():
     st.title("🌸 GeneGlow Skin Quiz")
     st.subheader("Discover your skin type and learn how to reverse aging naturally.")
 
@@ -127,12 +129,41 @@ def quiz():
             st.markdown("### Recommended Products for Your Country:")
             st.markdown("- Research local skincare brands or online options that work for your skin concerns.")
 
-# Page routing
-if st.session_state.page == 'home':
-    home()
+# Define the signup page
+def signup_page():
+    st.markdown("""
+        <style>
+            .stApp {background-color: #FFFDF6; font-family: 'Segoe UI', sans-serif;}
+            .stTextInput, .stButton > button {border-radius: 10px; padding: 0.5em;}
+            .stButton > button {background-color: #FFD700; color: #2C2C2C;}
+        </style>
+    """, unsafe_allow_html=True)
+
+    st.markdown('<div class="title">GeneGlow Sign Up</div>', unsafe_allow_html=True)
+
+    email = st.text_input("Email Address")
+    password = st.text_input("Password", type="password")
+    confirm_password = st.text_input("Confirm Password", type="password")
+
+    if st.button("Sign Up"):
+        if password == confirm_password:
+            st.success("Account created successfully! Please log in.")
+            st.session_state.page = "login"
+            st.experimental_rerun()
+        else:
+            st.error("Passwords do not match. Please try again.")
+
+    if st.button("Already have an account? Log in"):
+        st.session_state.page = "login"
+        st.experimental_rerun()
+
+# Page navigation
+if st.session_state.page == 'welcome':
+    welcome_page()
 elif st.session_state.page == 'login':
-    login()
+    login_page()
 elif st.session_state.page == 'signup':
-    signup()
+    signup_page()
 elif st.session_state.page == 'quiz':
-    quiz()
+    quiz_page()
+
