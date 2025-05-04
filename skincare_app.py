@@ -21,7 +21,7 @@ st.markdown("""
 # ✅ Page Navigation Logic
 def switch_page(page_name):
     st.session_state.page = page_name
-    st.experimental_rerun()
+   
 
 # --- WELCOME PAGE ---
 if st.session_state.page == "welcome":
