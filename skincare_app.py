@@ -31,7 +31,6 @@ st.markdown("""
 if st.button("Get Started"):
     # Redirect to login page (will be part of the next steps)
     st.session_state.page = "login"  # We'll handle routing later
-    st.experimental_rerun()
 import streamlit as st
 
 # PAGE SETUP
@@ -63,7 +62,6 @@ if st.button("Login"):
 # Option to register if the user doesn't have an account
 if st.button("Don't have an account? Sign up"):
     st.session_state.page = "signup"
-    st.experimental_rerun()
 import streamlit as st
 
 # PAGE SETUP
