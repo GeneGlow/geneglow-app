@@ -1,6 +1,6 @@
 import streamlit as st
 
-# PAGE SETUP
+# PAGE SETUP (should be at the top of the page)
 st.set_page_config(page_title="GeneGlow Skincare", layout="centered")
 
 # CUSTOM CSS (to make the page look clean)
@@ -33,7 +33,7 @@ if st.button("Get Started"):
     st.session_state.page = "login"  # We'll handle routing later
 import streamlit as st
 
-# PAGE SETUP
+# PAGE SETUP (should be at the top of the page)
 st.set_page_config(page_title="GeneGlow Skincare - Login", layout="centered")
 
 # CUSTOM CSS
@@ -58,13 +58,9 @@ if st.button("Login"):
         st.experimental_rerun()
     else:
         st.error("Invalid credentials. Please try again.")
-
-# Option to register if the user doesn't have an account
-if st.button("Don't have an account? Sign up"):
-    st.session_state.page = "signup"
 import streamlit as st
 
-# PAGE SETUP
+# PAGE SETUP (should be at the top of the page)
 st.set_page_config(page_title="GeneGlow Skincare Quiz", layout="centered")
 
 # CUSTOM CSS
@@ -77,46 +73,6 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Quiz Content
-st.title("🌸 GeneGlow Skin Quiz")
-st.subheader("Discover your skin type and learn how to reverse aging naturally.")
-
-# Ask more in-depth questions
-age = st.slider("How old are you?", 12, 80, 20)
-skin_type = st.selectbox("What best describes your skin?", ["Oily", "Dry", "Combination", "Normal", "Sensitive"])
-concern = st.text_area("What is your biggest skin concern? (e.g., fine lines, acne, wrinkles, etc.)")
-
-# Tips based on answers
-if st.button("Get My Skin Report"):
-    st.success("Thank you for completing the quiz! Here's how to reverse aging and improve your skin:")
-    
-    if skin_type == "Oily":
-        st.markdown("- Use a gentle foaming cleanser with salicylic acid to clear pores.")
-        st.markdown("- Incorporate Vitamin C for brighter skin and anti-aging.")
-    elif skin_type == "Dry":
-        st.markdown("- Hydrate with a rich moisturizer, and use hyaluronic acid.")
-        st.markdown("- Avoid hot showers, they can dry out your skin further.")
-    # More tailored advice for each skin type...
-
-    st.markdown("### Anti-Aging Tips:")
-    st.markdown("- Apply sunscreen daily (even indoors!). UV rays age skin.")
-    st.markdown("- Incorporate retinol into your night routine for smoother skin.")
-    st.markdown("- Drink plenty of water and eat foods rich in antioxidants.")
-
-import streamlit as st
-
-# PAGE SETUP
-st.set_page_config(page_title="GeneGlow Skincare Quiz", layout="centered")
-
-# CUSTOM CSS
-st.markdown("""
-    <style>
-        .stApp {background-color: #FFFDF6; font-family: 'Segoe UI', sans-serif;}
-        .stButton > button {background-color: #FFD700; color: #2C2C2C; border-radius: 10px; padding: 0.5em;}
-        .stButton > button:hover {background-color: #00CFC1; color: white;}
-    </style>
-""", unsafe_allow_html=True)
-
-# Title and introduction
 st.title("🌸 GeneGlow Skin Quiz")
 st.subheader("Discover your skin type and learn how to reverse aging naturally.")
 
@@ -180,4 +136,3 @@ if st.button("Get My Skin Report"):
     else:
         st.markdown("### Recommended Products for Your Country:")
         st.markdown("- Research local skincare brands or online options that work for your skin concerns.")
-
