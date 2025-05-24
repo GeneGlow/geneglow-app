@@ -69,7 +69,8 @@ def generate_results(data):
 
     result['lifestyle'] = lifestyle
     return result
+import os
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 10000))  # Render sets this PORT automatically
-    app.run(host='0.0.0.0', port=port)  # Bind to 0.0.0.0 for external access
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)
