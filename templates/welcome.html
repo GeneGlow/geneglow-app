@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Welcome to GeneGlow</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body class="welcome-page">
+
+  <div class="container">
+    <img src="{{ url_for('static', filename='logo.png') }}" alt="GeneGlow Logo" class="logo">
+
+    <h1>Welcome to GeneGlow! 🌟</h1>
+    
+    <p class="intro-text">
+      GeneGlow is your personal skincare companion powered by science and AI. We analyze your skin type, lifestyle, and environment to craft a personalized skincare plan tailored just for you.
+    </p>
+
+   <a href="{{ url_for('quiz') }}">
+  <button class="start-btn">Start Quiz</button>
+</a>
+  </div>
+</body>
+</html>

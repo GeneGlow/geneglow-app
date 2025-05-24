@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GeneGlow - Skincare Quiz</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #fff8f0;
+      padding: 40px;
+      max-width: 900px;
+      margin: auto;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #d65a31;
+    }
+    section {
+      margin-bottom: 30px;
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.05);
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 10px;
+    }
+    input, select {
+      margin-top: 5px;
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      margin-bottom: 15px;
+    }
+    button {
+      background-color: #d65a31;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      cursor: pointer;
+      width: 100%;
+    }
+    button:hover {
+      background-color: #e76f51;
+    }
+  </style>
+</head>
+<body>
+
+<h1>✨ GeneGlow Skincare Quiz ✨</h1>
+
+<form method="POST">
+
+  <!-- Section 1: Personal Info -->
+  <section>
+    <h2>👤 Personal Info</h2>
+    <label>Name:</label>
+    <input type="text" name="name" required>
+
+    <label>Age:</label>
+    <input type="number" name="age" required>
+
+    <label>Gender:</label>
+    <select name="gender" required>
+      <option value="">-- Select --</option>
+      <option>Female</option>
+      <option>Male</option>
+      <option>Non-binary</option>
+      <option>Prefer not to say</option>
+    </select>
+  </section>
+
+  <!-- Section 2: Skin Type & Concerns -->
+  <section>
+    <h2>🧴 Skin Type & Concerns</h2>
+    <label>Skin Type:</label>
+    <select name="skin_type" required>
+      <option value="">-- Select --</option>
+      <option>Oily</option>
+      <option>Dry</option>
+      <option>Combination</option>
+      <option>Sensitive</option>
+      <option>Normal</option>
+      <option>Not Sure</option>
+    </select>
+
+    <label>Do you get frequent acne/breakouts?</label>
+    <select name="acne">
+      <option>Yes</option>
+      <option>No</option>
+      <option>Occasionally</option>
+    </select>
+
+    <label>Prone to redness/inflammation?</label>
+    <select name="redness">
+      <option>Yes</option>
+      <option>No</option>
+      <option>Sometimes</option>
+    </select>
+
+    <label>Do you have visible pores/blackheads?</label>
+    <select name="pores">
+      <option>Yes</option>
+      <option>No</option>
+      <option>A little</option>
+      <option>Not sure</option>
+    </select>
+
+    <label>Hyperpigmentation or uneven tone?</label>
+    <input type="text" name="hyperpigmentation">
+
+    <label>Dryness or flakiness?</label>
+    <input type="text" name="dryness">
+
+    <label>What skincare products do you currently use?</label>
+    <input type="text" name="products">
+  </section>
+
+  <!-- Section 3: Sensitivities -->
+  <section>
+    <h2>⚠️ Sensitivities & Medical</h2>
+    <label>Skin sensitivities?</label>
+    <select name="sensitivity">
+      <option>Yes</option>
+      <option>No</option>
+      <option>Not sure</option>
+    </select>
+
+    <label>Allergies (e.g., fragrance, oils)?</label>
+    <input type="text" name="allergies">
+
+    <label>Known skin conditions?</label>
+    <input type="text" name="conditions">
+
+    <label>Medications that affect skin?</label>
+    <input type="text" name="medications">
+  </section>
+
+  <!-- Section 4: Lifestyle -->
+  <section>
+    <h2>🥗 Lifestyle & Diet</h2>
+    <label>Daily water intake (glasses):</label>
+    <input type="number" name="water">
+
+    <label>Sleep hours per night:</label>
+    <input type="number" name="sleep">
+
+    <label>Do you eat fruits/veggies daily?</label>
+    <select name="veggies">
+      <option>Yes</option>
+      <option>No</option>
+      <option>Sometimes</option>
+    </select>
+
+    <label>Processed food/sugar intake?</label>
+    <select name="junk">
+      <option>High</option>
+      <option>Moderate</option>
+      <option>Low</option>
+    </select>
+
+    <label>Do you smoke or vape?</label>
+    <select name="smoke">
+      <option>Yes</option>
+      <option>No</option>
+      <option>Occasionally</option>
+    </select>
+
+    <label>Stress level?</label>
+    <select name="stress">
+      <option>Frequently</option>
+      <option>Sometimes</option>
+      <option>Rarely</option>
+    </select>
+  </section>
+
+  <!-- Section 5: Environment -->
+  <section>
+    <h2>🌍 Environment & Habits</h2>
+    <label>Where do you live?</label>
+    <input type="text" name="location">
+
+    <label>Climate & pollution level:</label>
+    <select name="environment">
+      <option>Hot & Humid</option>
+      <option>Cold & Dry</option>
+      <option>Polluted</option>
+      <option>Clean</option>
+    </select>
+
+    <label>Sun exposure per day:</label>
+    <select name="sun">
+      <option>High</option>
+      <option>Moderate</option>
+      <option>Low</option>
+    </select>
+
+    <label>Do you use sunscreen?</label>
+    <select name="sunscreen">
+      <option>Yes</option>
+      <option>No</option>
+      <option>Only in summer</option>
+      <option>Rarely</option>
+    </select>
+
+    <label>How often do you cleanse your face?</label>
+    <select name="cleanse">
+      <option>Once a day</option>
+      <option>Twice a day</option>
+      <option>Only at night</option>
+      <option>Rarely</option>
+    </select>
+  </section>
+
+  <!-- Bonus -->
+  <section>
+    <h2>💫 Extras</h2>
+    <label>Interested in natural home remedies?</label>
+    <select name="home_remedies">
+      <option>Yes</option>
+      <option>No</option>
+    </select>
+
+    <label>What skincare style do you prefer?</label>
+    <select name="skincare_style">
+      <option>K-beauty</option>
+      <option>Clean beauty</option>
+      <option>Minimalist</option>
+      <option>Not sure</option>
+    </select>
+  </section>
+
+  <button type="submit">Show My Skincare Results</button>
+
+</form>
+
+</body>
+</html>
