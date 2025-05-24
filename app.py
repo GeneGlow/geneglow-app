@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+import os
 
 app = Flask(__name__)
 
@@ -52,7 +53,7 @@ def generate_results(data):
         result['remedies'] = ["DIY yogurt and honey mask", "Gentle exfoliation once a week"]
         result['tips'] = ["Maintain a simple routine", "Continue monitoring skin changes"]
 
-    # Additional custom tip based on lifestyle
+    # Additional custom tips based on lifestyle
     water = int(data.get('water', 0))
     sleep = int(data.get('sleep', 0))
 
@@ -69,5 +70,6 @@ def generate_results(data):
     result['lifestyle'] = lifestyle
     return result
 
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 10000))  # Render sets this PORT automatically
+    app.run(host='0.0.0.0', port=port)  # Bind to 0.0.0.0 for external access
