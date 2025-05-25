@@ -1,17 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>GeneGlow</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GeneGlow Start</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: 'Quicksand', sans-serif;
+      background: #fff8f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 20px;
+      box-sizing: border-box;
+      text-align: center;
+    }
+
+    .logo {
+      height: 50vh; /* Logo fills half the viewport height */
+      max-width: 90vw;
+      object-fit: contain;
+      margin-bottom: 50px;
+    }
+
+    .btn-start {
+      background-color: #d65a31;
+      color: white;
+      border: none;
+      padding: 16px 50px;
+      font-size: 1.3rem;
+      font-weight: 600;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+      width: 100%;
+      max-width: 300px;
+    }
+
+    .btn-start:hover {
+      background-color: #e76f51;
+    }
+
+    @media (max-width: 480px) {
+      .btn-start {
+        font-size: 1.1rem;
+        padding: 14px 40px;
+      }
+    }
+  </style>
 </head>
-<body class="splash-page">
-  <div class="splash-container">
-    <img src="{{ url_for('static', filename='logo.png') }}" alt="GeneGlow Logo" class="splash-logo">
-    <a href="{{ url_for('welcome') }}">
-      <button class="get-started-btn">Get Started</button>
-    </a>
-  </div>
-<body class="splash-page">
+<body>
+
+  <img src="{{ url_for('static', filename='logo.png') }}" alt="GeneGlow Logo" class="logo" />
+
+  <a href="{{ url_for('welcome') }}" class="btn-start">Get Started</a>
+
+</body>
 </html>

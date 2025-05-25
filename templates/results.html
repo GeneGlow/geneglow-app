@@ -1,27 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Your Skincare Results | GeneGlow</title>
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet" />
   <style>
+    :root {
+      --primary-color: #6a0dad;
+      --accent-color: #4b0082;
+      --background-gradient: linear-gradient(to right, #e6f0ff, #f5f5ff);
+    }
+
     body {
       font-family: 'Quicksand', sans-serif;
-      background: linear-gradient(to right, #e6f0ff, #f5f5ff);
+      background: var(--background-gradient);
       color: #333;
-      padding: 40px 20px;
+      padding: 5vw;
+      margin: 0;
       text-align: center;
     }
+
     h1 {
-      font-size: 2.5em;
+      font-size: 2.2rem;
       margin-bottom: 10px;
-      color: #4b0082;
+      color: var(--accent-color);
     }
+
     h2 {
-      color: #6a0dad;
+      font-size: 1.5rem;
+      color: var(--primary-color);
       margin-top: 20px;
     }
+
     .section {
       margin: 30px auto;
       padding: 20px;
@@ -30,31 +41,64 @@
       max-width: 700px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
+
     ul {
       text-align: left;
       list-style: square inside;
+      padding: 0;
+      margin: 10px 0 0;
     }
+
+    li {
+      margin: 8px 0;
+      font-size: 1rem;
+    }
+
     .highlight {
       font-weight: 600;
-      color: #663399;
+      color: var(--accent-color);
     }
+
     .button {
       margin-top: 30px;
-      padding: 12px 24px;
-      font-size: 1em;
+      padding: 14px 28px;
+      font-size: 1rem;
       border: none;
-      border-radius: 8px;
-      background-color: #6a0dad;
+      border-radius: 10px;
+      background-color: var(--primary-color);
       color: white;
       cursor: pointer;
-      transition: background 0.3s;
+      transition: background 0.3s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
     }
+
     .button:hover {
-      background-color: #4b0082;
+      background-color: var(--accent-color);
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      h2 {
+        font-size: 1.25rem;
+      }
+
+      .section {
+        padding: 16px;
+      }
+
+      .button {
+        width: 100%;
+        padding: 16px;
+        font-size: 1.05rem;
+      }
     }
   </style>
 </head>
 <body>
+
   <h1>🌸 Your GeneGlow Skin Analysis 🌸</h1>
 
   <div class="section">
@@ -91,6 +135,7 @@
     </ul>
   </div>
 
-  <a href="/quiz"><button class="button">Take Quiz Again</button></a>
+  <a href="/quiz"><button class="button">🔄 Take Quiz Again</button></a>
+
 </body>
 </html>
