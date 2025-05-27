@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Uploaded Image</title>
+</head>
+<body>
+    <h2>✨ Here’s your uploaded image</h2>
+    <img src="{{ image_url }}" alt="Uploaded Image" width="300">
+    
+    <h3>🧠 Detected Skin Tone: <span style="color: purple;">{{ skin_tone }}</span></h3>
+    <p>We’ll now personalize your experience based on your skin tone 💫</p>
+
+    <!-- 🎯 Start Quiz button passing skin tone via URL -->
+    <form action="{{ url_for('quiz') }}" method="get">
+        <input type="hidden" name="ai_skin_tone" value="{{ skin_tone }}">
+        <button type="submit">Start Quiz ➡️</button>
+    </form>
+</body>
+</html>

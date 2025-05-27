@@ -2,14 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Your Skincare Results | GeneGlow</title>
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <style>
     :root {
       --primary-color: #6a0dad;
       --accent-color: #4b0082;
-      --background-gradient: linear-gradient(to right, #e6f0ff, #f5f5ff);
+      --background-gradient: linear-gradient(to right, #fbeaff, #f0f4ff);
     }
 
     body {
@@ -22,13 +23,13 @@
     }
 
     h1 {
-      font-size: 2.2rem;
+      font-size: 2.4rem;
       margin-bottom: 10px;
       color: var(--accent-color);
     }
 
     h2 {
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       color: var(--primary-color);
       margin-top: 20px;
     }
@@ -38,8 +39,8 @@
       padding: 20px;
       background: #fff;
       border-radius: 15px;
-      max-width: 700px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      max-width: 720px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
     }
 
     ul {
@@ -60,7 +61,7 @@
     }
 
     .button {
-      margin-top: 30px;
+      margin-top: 20px;
       padding: 14px 28px;
       font-size: 1rem;
       border: none;
@@ -76,13 +77,34 @@
       background-color: var(--accent-color);
     }
 
+    img {
+      display: block;
+      max-width: 280px;
+      margin: 20px auto;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(106, 13, 173, 0.3);
+    }
+
+    .form-summary {
+      text-align: left;
+      padding-left: 20px;
+    }
+
+    .btn-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
     @media (max-width: 600px) {
       h1 {
-        font-size: 1.8rem;
+        font-size: 2rem;
       }
 
       h2 {
-        font-size: 1.25rem;
+        font-size: 1.3rem;
       }
 
       .section {
@@ -99,12 +121,41 @@
 </head>
 <body>
 
-  <h1>🌸 Your GeneGlow Skin Analysis 🌸</h1>
+<div id="result-content">
+  <h1>🌸 Your GeneGlow Skin Report 🌸</h1>
+
+  {% if image_url %}
+    <img src="{{ image_url }}" alt="Uploaded Skin Image" />
+  {% endif %}
+
+  {% if result.get('ai_skin_tone') %}
+  <div class="section">
+    <h2>🧬 AI Detected Skin Tone: <span class="highlight">{{ result['ai_skin_tone'] }}</span></h2>
+  </div>
+  {% endif %}
 
   <div class="section">
-    <h2>Your Skin Type: <span class="highlight">{{ result['type'] }}</span></h2>
+    <h2>🌈 Your Skin Type: 
+      <span class="highlight">
+        {{ result['type'] if result.get('type') else 'Not Determined' }}
+      </span>
+    </h2>
   </div>
 
+  {% if result.get('form_data') %}
+  <div class="section">
+    <h2>📝 Your Answers Summary:</h2>
+    <div class="form-summary">
+      <ul>
+        {% for key, value in result['form_data'].items() %}
+          <li><strong>{{ key.replace('_', ' ').title() }}:</strong> {{ value }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  {% endif %}
+
+  {% if result.get('products') %}
   <div class="section">
     <h2>🔬 Recommended Products:</h2>
     <ul>
@@ -113,7 +164,9 @@
       {% endfor %}
     </ul>
   </div>
+  {% endif %}
 
+  {% if result.get('remedies') %}
   <div class="section">
     <h2>🏠 Home Remedies:</h2>
     <ul>
@@ -122,20 +175,45 @@
       {% endfor %}
     </ul>
   </div>
+  {% endif %}
 
+  {% if result.get('tips') or result.get('lifestyle') %}
   <div class="section">
     <h2>💡 Lifestyle Tips:</h2>
     <ul>
-      {% for tip in result['tips'] %}
-        <li>{{ tip }}</li>
-      {% endfor %}
-      {% for tip in result['lifestyle'] %}
-        <li>{{ tip }}</li>
-      {% endfor %}
+      {% if result.get('tips') %}
+        {% for tip in result['tips'] %}
+          <li>{{ tip }}</li>
+        {% endfor %}
+      {% endif %}
+      {% if result.get('lifestyle') %}
+        {% for tip in result['lifestyle'] %}
+          <li>{{ tip }}</li>
+        {% endfor %}
+      {% endif %}
     </ul>
   </div>
+  {% endif %}
+</div>
 
+<div class="btn-container">
   <a href="/quiz"><button class="button">🔄 Take Quiz Again</button></a>
+  <button class="button" onclick="downloadPDF()">⬇️ Download PDF</button>
+</div>
+
+<script>
+  function downloadPDF() {
+    const element = document.getElementById('result-content');
+    const options = {
+      margin: 0.5,
+      filename: 'GeneGlow_Skin_Report.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
+    html2pdf().set(options).from(element).save();
+  }
+</script>
 
 </body>
 </html>

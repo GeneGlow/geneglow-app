@@ -1,0 +1,26 @@
+# 🌸 Python junk
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+
+# 🌍 Environment files
+.env
+
+# 🔐 Sensitive keys (NEVER push this!)
+service_account.json
+
+# 📁 Uploaded files
+static/uploads/
+
+# 📦 Virtual environment (if you're using one)
+venv/
+env/
+
+# 💡 VSCode & IDEs
+.vscode/
+.idea/
+
+# 💾 System files
+.DS_Store
+Thumbs.db

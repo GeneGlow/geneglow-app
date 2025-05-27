@@ -1,75 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>GeneGlow - Skincare Quiz</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Added for mobile -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --primary: #d65a31;
+      --accent: #fbeaff;
+      --bg: #fff8f0;
+      --card: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #fff8f0;
-      padding: 40px;
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(to right, var(--bg), var(--accent));
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      color: var(--primary);
+      font-size: 2.2rem;
+      margin-bottom: 30px;
+    }
+
+    form {
       max-width: 900px;
       margin: auto;
-      box-sizing: border-box;
     }
-    h1, h2 {
-      text-align: center;
-      color: #d65a31;
-    }
+
     section {
-      margin-bottom: 30px;
-      padding: 20px;
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 0 8px rgba(0,0,0,0.05);
+      background: var(--card);
+      padding: 25px;
+      margin-bottom: 25px;
+      border-radius: 15px;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
     }
+
+    h2 {
+      color: var(--primary);
+      margin-top: 0;
+    }
+
     label {
-      font-weight: bold;
       display: block;
-      margin-top: 10px;
+      margin-top: 15px;
+      font-weight: 600;
     }
-    input, select {
-      margin-top: 5px;
+
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    select {
       width: 100%;
       padding: 10px;
-      border-radius: 6px;
+      margin-top: 5px;
       border: 1px solid #ccc;
-      margin-bottom: 15px;
-      box-sizing: border-box;
+      border-radius: 10px;
+      font-size: 1rem;
+      background-color: #f9f9f9;
     }
+
+    input[type="file"] {
+      margin-top: 10px;
+    }
+
     button {
-      background-color: #d65a31;
-      color: white;
-      padding: 12px 24px;
-      border: none;
-      border-radius: 8px;
-      font-size: 18px;
-      cursor: pointer;
       width: 100%;
-      box-sizing: border-box;
+      padding: 14px;
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      margin-top: 30px;
+      cursor: pointer;
+      transition: background 0.3s;
     }
+
     button:hover {
       background-color: #e76f51;
     }
-    
-    /* Mobile styles */
-    @media only screen and (max-width: 480px) {
+
+    #image-preview {
+      display: none;
+      margin: 20px auto;
+      max-width: 300px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(214, 90, 49, 0.3);
+    }
+
+    @media screen and (max-width: 600px) {
       body {
         padding: 10px;
       }
-      
-      input, select, button {
-        font-size: 16px;
-        padding: 12px;
-      }
-      
-      h1, h2 {
-        font-size: 1.5rem;
-      }
-      
+
       section {
-        padding: 15px;
+        padding: 18px;
+      }
+
+      button {
+        font-size: 1rem;
+      }
+
+      h1 {
+        font-size: 1.6rem;
       }
     }
   </style>
@@ -78,19 +121,27 @@
 
 <h1>✨ GeneGlow Skincare Quiz ✨</h1>
 
-<form method="POST">
+<form action="/quiz" method="POST" id="quiz-section" enctype="multipart/form-data">
 
-  <!-- Sections here (unchanged) -->
+  <!-- Image Upload Section -->
+  <section id="upload-section">
+    <h2>📸 Upload or Take a Skin Picture</h2>
+    <label for="image-input">Choose or Take a Picture:</label>
+    <input type="file" id="image-input" name="image" accept="image/*" capture="environment" required />
+    <button type="button" id="upload-btn">Upload Image & Continue</button>
+    <img id="image-preview" src="" alt="Your uploaded skin picture"/>
+    <button type="button" id="retake-btn" style="display:none;">Retake Photo</button>
+  </section>
 
-  <!-- Section 1: Personal Info -->
+  <!-- Personal Info -->
   <section>
     <h2>👤 Personal Info</h2>
     <label>Name:</label>
-    <input type="text" name="name" required>
-
+    <input type="text" name="name" required />
+    <label>Email:</label>
+    <input type="email" name="email" required />
     <label>Age:</label>
-    <input type="number" name="age" required>
-
+    <input type="number" name="age" required />
     <label>Gender:</label>
     <select name="gender" required>
       <option value="">-- Select --</option>
@@ -101,9 +152,7 @@
     </select>
   </section>
 
-  <!-- rest of sections same -->
-
-  <!-- Section 2: Skin Type & Concerns -->
+  <!-- Skin Type -->
   <section>
     <h2>🧴 Skin Type & Concerns</h2>
     <label>Skin Type:</label>
@@ -116,6 +165,8 @@
       <option>Normal</option>
       <option>Not Sure</option>
     </select>
+
+    <input type="hidden" name="skin_concerns" value="">
 
     <label>Do you get frequent acne/breakouts?</label>
     <select name="acne">
@@ -131,7 +182,7 @@
       <option>Sometimes</option>
     </select>
 
-    <label>Do you have visible pores/blackheads?</label>
+    <label>Visible pores or blackheads?</label>
     <select name="pores">
       <option>Yes</option>
       <option>No</option>
@@ -140,66 +191,39 @@
     </select>
 
     <label>Hyperpigmentation or uneven tone?</label>
-    <input type="text" name="hyperpigmentation">
-
+    <input type="text" name="hyperpigmentation" />
     <label>Dryness or flakiness?</label>
-    <input type="text" name="dryness">
-
-    <label>What skincare products do you currently use?</label>
-    <input type="text" name="products">
+    <input type="text" name="dryness" />
+    <label>Current skincare products:</label>
+    <input type="text" name="products" />
   </section>
 
-  <!-- Section 3: Sensitivities -->
+  <!-- Lifestyle -->
   <section>
-    <h2>⚠️ Sensitivities & Medical</h2>
-    <label>Skin sensitivities?</label>
-    <select name="sensitivity">
-      <option>Yes</option>
-      <option>No</option>
-      <option>Not sure</option>
-    </select>
-
-    <label>Allergies (e.g., fragrance, oils)?</label>
-    <input type="text" name="allergies">
-
-    <label>Known skin conditions?</label>
-    <input type="text" name="conditions">
-
-    <label>Medications that affect skin?</label>
-    <input type="text" name="medications">
-  </section>
-
-  <!-- Section 4: Lifestyle -->
-  <section>
-    <h2>🥗 Lifestyle & Diet</h2>
+    <h2>🥗 Lifestyle & Habits</h2>
     <label>Daily water intake (glasses):</label>
-    <input type="number" name="water">
-
+    <input type="number" name="water" />
     <label>Sleep hours per night:</label>
-    <input type="number" name="sleep">
-
-    <label>Do you eat fruits/veggies daily?</label>
+    <input type="number" name="sleep" />
+    <label>Eat fruits/veggies daily?</label>
     <select name="veggies">
       <option>Yes</option>
       <option>No</option>
       <option>Sometimes</option>
     </select>
-
-    <label>Processed food/sugar intake?</label>
+    <label>Junk/processed food intake:</label>
     <select name="junk">
       <option>High</option>
       <option>Moderate</option>
       <option>Low</option>
     </select>
-
     <label>Do you smoke or vape?</label>
     <select name="smoke">
       <option>Yes</option>
       <option>No</option>
       <option>Occasionally</option>
     </select>
-
-    <label>Stress level?</label>
+    <label>Stress level:</label>
     <select name="stress">
       <option>Frequently</option>
       <option>Sometimes</option>
@@ -207,12 +231,11 @@
     </select>
   </section>
 
-  <!-- Section 5: Environment -->
+  <!-- Environment -->
   <section>
-    <h2>🌍 Environment & Habits</h2>
-    <label>Where do you live?</label>
-    <input type="text" name="location">
-
+    <h2>🌍 Environment</h2>
+    <label>Location:</label>
+    <input type="text" name="location" />
     <label>Climate & pollution level:</label>
     <select name="environment">
       <option>Hot & Humid</option>
@@ -220,23 +243,20 @@
       <option>Polluted</option>
       <option>Clean</option>
     </select>
-
-    <label>Sun exposure per day:</label>
+    <label>Daily sun exposure:</label>
     <select name="sun">
       <option>High</option>
       <option>Moderate</option>
       <option>Low</option>
     </select>
-
-    <label>Do you use sunscreen?</label>
+    <label>Use sunscreen?</label>
     <select name="sunscreen">
       <option>Yes</option>
       <option>No</option>
       <option>Only in summer</option>
       <option>Rarely</option>
     </select>
-
-    <label>How often do you cleanse your face?</label>
+    <label>Cleansing frequency:</label>
     <select name="cleanse">
       <option>Once a day</option>
       <option>Twice a day</option>
@@ -245,7 +265,7 @@
     </select>
   </section>
 
-  <!-- Bonus -->
+  <!-- Extras -->
   <section>
     <h2>💫 Extras</h2>
     <label>Interested in natural home remedies?</label>
@@ -253,8 +273,7 @@
       <option>Yes</option>
       <option>No</option>
     </select>
-
-    <label>What skincare style do you prefer?</label>
+    <label>Skincare style preference:</label>
     <select name="skincare_style">
       <option>K-beauty</option>
       <option>Clean beauty</option>
@@ -263,9 +282,44 @@
     </select>
   </section>
 
-  <button type="submit">Show My Skincare Results</button>
-
+  <button type="submit">🌟 Show My Skincare Results</button>
 </form>
+
+<script>
+  const uploadBtn = document.getElementById('upload-btn');
+  const imageInput = document.getElementById('image-input');
+  const imagePreview = document.getElementById('image-preview');
+  const quizSection = document.getElementById('quiz-section');
+  const uploadSection = document.getElementById('upload-section');
+  const retakeBtn = document.getElementById('retake-btn');
+
+  uploadBtn.addEventListener('click', () => {
+    const file = imageInput.files[0];
+    if (!file) return alert('Please select an image!');
+    const allowed = ['image/jpeg', 'image/png', 'image/jpg'];
+    if (!allowed.includes(file.type)) return alert('Only JPG/PNG allowed!');
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      imagePreview.src = e.target.result;
+      imagePreview.style.display = 'block';
+      retakeBtn.style.display = 'block';
+    };
+    reader.readAsDataURL(file);
+
+    quizSection.style.display = 'block';
+    uploadSection.style.display = 'none';
+  });
+
+  retakeBtn.addEventListener('click', () => {
+    imageInput.value = '';
+    imagePreview.src = '';
+    imagePreview.style.display = 'none';
+    retakeBtn.style.display = 'none';
+    quizSection.style.display = 'none';
+    uploadSection.style.display = 'block';
+  });
+</script>
 
 </body>
 </html>
